@@ -49,12 +49,12 @@ p { color: var(--muted); }
 .hero-description p { margin-bottom: .6rem; font-size: 1.08rem; }
 .hero-pills { display: flex; flex-wrap: wrap; gap: .55rem; margin: 1.7rem 0 0; padding: 0; list-style: none; }
 .hero-pills li { padding: .45rem .75rem; border: 1px solid rgba(217,174,90,.2); border-radius: 999px; color: #d8c5bb; font-size: .72rem; }
-.hero-visual { position: relative; max-width: 560px; justify-self: end; }
-.image-frame { position: relative; overflow: hidden; border: 1px solid rgba(217,174,90,.25); border-radius: 240px 240px 32px 32px; background: linear-gradient(160deg, #211018, var(--ink)); box-shadow: 0 35px 80px rgba(0,0,0,.38); }
+.hero-visual { position: relative; width: 100%; max-width: 440px; justify-self: end; }
+.image-frame { position: relative; overflow: hidden; aspect-ratio: 4 / 5; border: 1px solid rgba(217,174,90,.25); border-radius: 220px 220px 32px 32px; background: linear-gradient(160deg, #211018, var(--ink)); box-shadow: 0 35px 80px rgba(0,0,0,.38); }
 .image-frame::after { content: ""; position: absolute; inset: 0; border: 1px solid rgba(255,255,255,.06); border-radius: inherit; pointer-events: none; }
-.image-frame img { width: 100%; aspect-ratio: 1 / 1.08; object-fit: cover; object-position: center top; }
+.image-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
 .image-shine { position: absolute; inset: auto 12% 0; height: 26%; background: radial-gradient(circle at center, rgba(217,174,90,.2), transparent 70%); filter: blur(12px); }
-.journey-card { position: absolute; left: -80px; bottom: 24px; width: min(390px, 84%); padding: 18px 20px; border: 1px solid rgba(217,174,90,.25); border-radius: 16px; background: rgba(22,11,18,.84); box-shadow: 0 16px 44px rgba(0,0,0,.36); backdrop-filter: blur(14px); }
+.journey-card { position: absolute; left: 18px; right: 18px; bottom: 18px; width: auto; padding: 18px 20px; border: 1px solid rgba(217,174,90,.25); border-radius: 16px; background: rgba(22,11,18,.9); box-shadow: 0 16px 44px rgba(0,0,0,.36); backdrop-filter: blur(14px); }
 .journey-card > p { margin-bottom: .7rem; color: var(--gold); font-family: var(--display); font-size: 1rem; }
 .journey-card ol { display: flex; align-items: center; justify-content: space-between; gap: .25rem; margin: 0; padding: 0; list-style: none; font-size: .72rem; }
 .journey-card li { display: flex; align-items: center; gap: .35rem; color: #e6d9d1; }
@@ -115,8 +115,8 @@ p { color: var(--muted); }
 .price-card.muted { opacity: .68; }
 .pricing-note { margin: 28px 0 0; text-align: center; font-size: .8rem; }
 .presenter { display: grid; grid-template-columns: .9fr 1.1fr; gap: 70px; align-items: center; background: var(--ink-soft); }
-.presenter-visual { position: relative; }
-.presenter-visual > img { width: 100%; border: 1px solid rgba(217,174,90,.25); border-radius: 220px 220px 22px 22px; background: #211018; }
+.presenter-visual { position: relative; aspect-ratio: 4 / 5; }
+.presenter-visual > img { width: 100%; height: 100%; border: 1px solid rgba(217,174,90,.25); border-radius: 220px 220px 22px 22px; background: #211018; object-fit: cover; object-position: center; }
 .presenter-stats { position: absolute; right: -25px; bottom: 24px; display: grid; gap: 1px; min-width: 250px; overflow: hidden; border: 1px solid rgba(217,174,90,.25); border-radius: 14px; background: rgba(5,14,25,.83); backdrop-filter: blur(12px); }
 .presenter-stats span { padding: 10px 14px; color: var(--muted); font-size: .72rem; }
 .presenter-stats span + span { border-top: 1px solid rgba(255,255,255,.07); }
@@ -136,9 +136,10 @@ p { color: var(--muted); }
 .guarantee-seal { display: grid; place-items: center; align-content: center; width: 150px; height: 150px; border: 1px solid rgba(217,174,90,.55); border-radius: 50%; box-shadow: inset 0 0 0 8px var(--ink-soft), inset 0 0 0 9px rgba(217,174,90,.22); }
 .guarantee-seal strong { color: var(--gold); font-family: var(--display); font-size: 4.2rem; line-height: .8; }
 .guarantee-seal span { color: var(--muted); font-size: .72rem; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
-.testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
-.testimonial { overflow: hidden; margin: 0; border: 1px solid var(--line); border-radius: 18px; background: var(--ink); }
-.testimonial img, .testimonial video { width: 100%; height: 100%; max-height: 590px; object-fit: cover; }
+.testimonial-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; align-items: stretch; }
+.testimonial { display: grid; place-items: center; overflow: hidden; aspect-ratio: 1 / 1; margin: 0; padding: 12px; border: 1px solid var(--line); border-radius: 18px; background: var(--ink); }
+.testimonial img, .testimonial video { width: 100%; height: 100%; max-height: none; object-fit: contain; border-radius: 12px; background: #f4efe8; }
+.testimonial video { background: #090609; }
 .accordion { max-width: 900px; margin: 0 auto; border-top: 1px solid var(--line); }
 .accordion details { border-bottom: 1px solid var(--line); }
 .accordion summary { display: flex; justify-content: space-between; gap: 24px; padding: 25px 0; color: var(--cream); font-family: var(--display); font-size: 1.18rem; cursor: pointer; list-style: none; }
@@ -171,7 +172,7 @@ footer p { max-width: 740px; margin: 0; font-size: .7rem; }
 @media (max-width: 1000px) {
   .desktop-nav { display: none; }
   .hero { min-height: auto; grid-template-columns: 1fr 1fr; gap: 28px; }
-  .journey-card { left: -20px; }
+  .journey-card { left: 16px; right: 16px; }
   .comparison-grid { grid-template-columns: 1fr; }
   .comparison-card { grid-template-columns: 1fr auto 1fr; min-height: 140px; }
   .four-grid { grid-template-columns: 1fr 1fr; }
@@ -196,7 +197,7 @@ footer p { max-width: 740px; margin: 0; font-size: .7rem; }
   .hero h1 { font-size: clamp(2.55rem, 12vw, 4.2rem); }
   .hero-description p { font-size: .97rem; }
   .hero-pills { justify-content: center; }
-  .hero-visual { max-width: 510px; justify-self: center; }
+  .hero-visual { max-width: 420px; justify-self: center; }
   .journey-card { left: 3%; right: 3%; bottom: 12px; width: 94%; }
   .offer-strip { display: none; }
   .section { padding: 78px 20px; }
