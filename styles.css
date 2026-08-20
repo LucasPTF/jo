@@ -193,6 +193,10 @@ footer p { max-width: 740px; margin: 0; font-size: .7rem; }
 .thank-you-copy h1 { margin-bottom: 1.35rem; font-size: clamp(3rem, 5.5vw, 5.6rem); }
 .thank-you-copy h1 span { color: var(--gold); }
 .thank-you-lead { max-width: 600px; margin-bottom: 1.7rem; font-size: 1.08rem; }
+.thank-you-event-date { display: inline-flex; align-items: center; gap: 12px; margin: 0 0 1.7rem; padding: 12px 18px; border: 1px solid rgba(217,174,90,.48); border-radius: 999px; background: rgba(217,174,90,.1); box-shadow: 0 12px 35px rgba(0,0,0,.16); }
+.thank-you-event-date span { color: var(--muted); font-size: .68rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.thank-you-event-date strong { color: var(--gold); font-family: var(--display); font-size: 1.65rem; line-height: 1; }
+.thank-you-event-date b { color: var(--cream); font-size: 1rem; }
 .confirmation-note { display: grid; grid-template-columns: auto 1fr; gap: 16px; max-width: 610px; margin-bottom: 1.9rem; padding: 20px; border: 1px solid rgba(217,174,90,.2); border-radius: 16px; background: rgba(255,255,255,.035); }
 .confirmation-note > span { display: grid; place-items: center; width: 38px; height: 38px; border-radius: 50%; background: rgba(217,174,90,.1); color: var(--gold); }
 .confirmation-note strong { color: var(--cream); }
@@ -289,6 +293,10 @@ footer p { max-width: 740px; margin: 0; font-size: .7rem; }
   .success-seal { width: 56px; height: 56px; }
   .thank-you-copy h1 { font-size: clamp(2.75rem, 13vw, 4rem); }
   .thank-you-lead { font-size: 1rem; }
+  .thank-you-event-date { display: grid; grid-template-columns: 1fr auto; width: 100%; border-radius: 16px; }
+  .thank-you-event-date span { grid-column: 1 / -1; }
+  .thank-you-event-date strong { font-size: 1.9rem; }
+  .thank-you-event-date b { justify-self: end; }
   .confirmation-note { padding: 17px; }
   .thank-you-copy .button { width: 100%; text-align: center; }
   .next-steps-card { padding: 26px 22px; border-radius: 22px; }
