@@ -12,8 +12,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/styles.css" />
+    <!-- Meta Pixel Code -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '290046909933492');
+      fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
   </head>
   <body class="thank-you-page">
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=290046909933492&amp;ev=PageView&amp;noscript=1" alt="" /></noscript>
     <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
 
     <header class="site-header thank-you-header" aria-label="Cabeçalho">
@@ -49,7 +64,10 @@
             </div>
           </div>
 
-          <a class="button button-primary" href="/angulo1">Voltar para a página principal <span aria-hidden="true">→</span></a>
+          <div class="thank-you-actions">
+            <a class="button button-primary" href="https://chat.whatsapp.com/Epr6zT6pUy0JigeN0MCYqw" target="_blank" rel="noopener noreferrer">Entrar no grupo do WhatsApp <span aria-hidden="true">→</span></a>
+            <a class="button button-secondary" href="/angulo1">Voltar para a página principal</a>
+          </div>
         </div>
 
         <aside class="next-steps-card" aria-labelledby="proximos-passos-titulo">
