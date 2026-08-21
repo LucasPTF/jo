@@ -1,4 +1,4 @@
-name: Universal Deploy via FTP na Hostinger
+name: Deploy via FTP na Hostinger
 
 on:
   push:
@@ -6,133 +6,13 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
-      # ==========================================
-      # 1. Baixar o código
-      # ==========================================
       - name: Checkout
         uses: actions/checkout@v4
 
-      # ==========================================
-      # 2. Configurar Node.js
-      # ==========================================
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "24"
-
-      # ==========================================
-      # 3. Detectar gerenciador de pacotes
-      # ==========================================
-      - name: Detect package manager
-        id: package-manager
-        shell: bash
-        run: |
-          if [ -f "pnpm-lock.yaml" ]; then
-            echo "manager=pnpm" >> "$GITHUB_OUTPUT"
-          elif [ -f "yarn.lock" ]; then
-            echo "manager=yarn" >> "$GITHUB_OUTPUT"
-          elif [ -f "package-lock.json" ]; then
-            echo "manager=npm" >> "$GITHUB_OUTPUT"
-          else
-            echo "manager=npm" >> "$GITHUB_OUTPUT"
-          fi
-
-      # ==========================================
-      # 4. Ativar Corepack para pnpm/yarn
-      # ==========================================
-      - name: Enable Corepack
-        run: corepack enable
-
-      # ==========================================
-      # 5. Instalar dependências
-      # ==========================================
-      - name: Install dependencies
-        shell: bash
-        run: |
-          MANAGER="${{ steps.package-manager.outputs.manager }}"
-
-          if [ "$MANAGER" = "pnpm" ]; then
-            pnpm install --frozen-lockfile
-
-          elif [ "$MANAGER" = "yarn" ]; then
-            yarn install --immutable || yarn install
-
-          else
-            if [ -f "package-lock.json" ]; then
-              npm ci --legacy-peer-deps
-            else
-              npm install --legacy-peer-deps
-            fi
-          fi
-
-      # ==========================================
-      # 6. Executar Build
-      # ==========================================
-      - name: Build
-        shell: bash
-        run: |
-          MANAGER="${{ steps.package-manager.outputs.manager }}"
-
-          if [ "$MANAGER" = "pnpm" ]; then
-            pnpm run build
-
-          elif [ "$MANAGER" = "yarn" ]; then
-            yarn build
-
-          else
-            npm run build
-          fi
-
-      # ==========================================
-      # 7. Detectar pasta de saída
-      # ==========================================
-      - name: Detect build output
-        id: build-output
-        shell: bash
-        run: |
-          if [ -d "dist" ]; then
-            echo "directory=dist" >> "$GITHUB_OUTPUT"
-
-          elif [ -d "build" ]; then
-            echo "directory=build" >> "$GITHUB_OUTPUT"
-
-          else
-            echo "ERRO: Nenhuma pasta dist/ ou build/ encontrada."
-            echo "Conteúdo do projeto:"
-            ls -la
-            exit 1
-          fi
-
-      # ==========================================
-      # 8. Criar .htaccess para SPA
-      # ==========================================
-      - name: Create SPA .htaccess
-        shell: bash
-        run: |
-          OUTPUT="${{ steps.build-output.outputs.directory }}"
-
-          cat > "$OUTPUT/.htaccess" << 'EOF'
-          <IfModule mod_rewrite.c>
-            RewriteEngine On
-
-            RewriteBase /
-
-            RewriteRule ^index\.html$ - [L]
-
-            RewriteCond %{REQUEST_FILENAME} !-f
-            RewriteCond %{REQUEST_FILENAME} !-d
-
-            RewriteRule . /index.html [L]
-          </IfModule>
-          EOF
-
-      # ==========================================
-      # 9. Deploy FTP para Hostinger
-      # ==========================================
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
@@ -141,19 +21,13 @@ jobs:
           password: ${{ secrets.FTP_PASS }}
           protocol: ftp
           port: 21
-
-          local-dir: ${{ steps.build-output.outputs.directory }}/
+          local-dir: ./
           server-dir: /
-
           timeout: 120000
-
           dangerous-clean-slate: false
           dry-run: false
-
           log-level: verbose
-
           exclude: |
             **/.git*
             **/.git*/**
             **/.github/**
-            **/node_modules/**
