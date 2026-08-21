@@ -1,17 +1,20 @@
-name: Deploy via FTP na Hostinger
+      - name: Create .htaccess
+        run: |
+          cat > .htaccess << 'EOF'
+          RewriteEngine On
 
-on:
-  push:
-    branches: ["main"]
-  workflow_dispatch:
+          RewriteRule ^$ /angulo1 [R=302,L]
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
+          RewriteRule ^angulo1/?$ /index.html [L]
+          RewriteRule ^angulo2/?$ /index.html [L]
+          RewriteRule ^angulo3/?$ /index.html [L]
 
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+          RewriteRule ^obrigado/?$ /obrigado.html [L]
+
+          RewriteCond %{REQUEST_FILENAME} -f [OR]
+          RewriteCond %{REQUEST_FILENAME} -d
+          RewriteRule ^ - [L]
+          EOF
 
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
