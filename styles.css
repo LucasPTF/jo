@@ -11,7 +11,7 @@
   --display: "Playfair Display", Georgia, serif;
   --sans: "DM Sans", Arial, sans-serif;
 }
-
+/*ALTERADO PARA O COMIT8*/
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--ink); color: var(--cream); font-family: var(--sans); font-size: 16px; line-height: 1.65; overflow-x: hidden; }
